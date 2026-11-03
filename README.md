@@ -75,3 +75,21 @@ revisión; después entra como `docente.demo` (o como administrador), revísala 
 
 > **Importante:** borra estos usuarios (en `/admin/users/`, como administrador) o cambia su contraseña
 > antes de publicar el blog en internet. Contraseñas conocidas en un servidor público son un riesgo.
+## Cómo he desplegado el proyecto
+
+Comandos que he usado:
+
+- `sudo apt install php-sqlite3 php-xml php-mbstring php-intl php-curl unzip composer`
+- `composer install`
+- `php bin/console create-schema`
+- `php bin/console app:create-user admin "Administrador"`
+- `php -S localhost:8000 -t public`
+- `ssh -L 8000:localhost:8000 antonio-torres@172.16.12.63` (túnel para ver el blog desde mi Mac)
+
+Problemas que me han surgido:
+
+- `apt install` sin `sudo` daba "Permiso denegado".
+- Faltaban Composer y `php-sqlite3`.
+- Lancé el túnel SSH desde la Debian y no desde el Mac, y `php -S` daba "Address already in use".
+- Hice `git switch` fuera de `~/miniblog` y Git decía que no era un repositorio.
+- Al crear el pull request, GitHub proponía por defecto el repositorio del profesor y tuve que cambiar *base repository* a mi fork.
